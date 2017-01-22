@@ -2,13 +2,11 @@ package com.elorri.android.recyclerviewripple;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,9 +63,9 @@ public class MainFragment extends Fragment {
 
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerview);
-        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(mContext);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
         recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setAdapter(new NumberedAdapter(mContext,30));
+        recyclerView.setAdapter(new NumberedAdapter(mContext, 30));
 
         return view;
     }
@@ -77,16 +75,9 @@ public class MainFragment extends Fragment {
         Resources.Theme currentTheme = mContext.getTheme();
         currentTheme.applyStyle(themeRes, true);
         selectableItem.setBackground(mContext.getResources()
-                .getDrawable(getResDrawable(R.attr.selectableItemBackground), currentTheme));
+                .getDrawable(RessoucesUtils
+                        .getResDrawable(mContext, R.attr.selectableItemBackground), currentTheme));
     }
 
-    private int getResDrawable(int drawableThemeAttr) {
-        int[] drawableAttr = new int[]{drawableThemeAttr};
-        int indexOfdrawableAttr = 0;
-        TypedValue typedValue = new TypedValue();
-        TypedArray a = getContext().obtainStyledAttributes(typedValue.data, drawableAttr);
-        int drawableRes = a.getResourceId(indexOfdrawableAttr, -1);
-        a.recycle();
-        return drawableRes;
-    }
+
 }

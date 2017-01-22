@@ -1,6 +1,7 @@
 package com.elorri.android.recyclerviewripple;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,7 +33,7 @@ public class NumberedAdapter extends RecyclerView.Adapter<NumberedAdapter.TextVi
 
     @Override
     public TextViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        mContext.getTheme().applyStyle(getThemeRes(viewType), true);
+        //mContext.getTheme().applyStyle(getThemeRes(viewType), true);
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item, parent, false);
         return new TextViewHolder(view);
@@ -63,6 +64,11 @@ public class NumberedAdapter extends RecyclerView.Adapter<NumberedAdapter.TextVi
             public void onClick(View v) {
                 Toast.makeText(
                         holder.textView.getContext(), label, Toast.LENGTH_SHORT).show();
+
+                Resources.Theme currentTheme = mContext.getTheme();
+                currentTheme.applyStyle(getThemeRes(getItemViewType(position)), true);
+                v.setBackground(mContext.getResources().getDrawable(
+                        RessoucesUtils.getResDrawable(mContext, R.attr.selectableItemBackground), currentTheme));
             }
         });
     }
